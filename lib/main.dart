@@ -16,6 +16,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'BLoC Counter',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(primarySwatch: Colors.deepPurple, useMaterial3: true),
       home: BlocProvider(
         create: (_) => CounterBloc(),
         child: const CounterPage(),
@@ -32,7 +34,7 @@ class CounterPage extends StatelessWidget {
     final counterBloc = context.read<CounterBloc>();
 
     return Scaffold(
-      appBar: AppBar(title: const Text('BLoC Counter')),
+      appBar: AppBar(title: const Text('BLoC Counter'), centerTitle: true),
       body: Center(
         child: BlocBuilder<CounterBloc, CounterState>(
           builder: (context, state) {
@@ -49,13 +51,15 @@ class CounterPage extends StatelessWidget {
           FloatingActionButton(
             heroTag: 'increment',
             onPressed: () => counterBloc.add(IncrementEvent()),
-            child: const Icon(Icons.add),
+            backgroundColor: Colors.green,
+            child: const Icon(Icons.add, color: Colors.white),
           ),
           const SizedBox(height: 10),
           FloatingActionButton(
             heroTag: 'decrement',
             onPressed: () => counterBloc.add(DecrementEvent()),
-            child: const Icon(Icons.remove),
+            backgroundColor: Colors.red,
+            child: const Icon(Icons.remove, color: Colors.white),
           ),
         ],
       ),
